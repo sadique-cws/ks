@@ -1,0 +1,21 @@
+[25-Jul-2020 06:50:01 UTC] PHP Fatal error:  Cannot use object of type stdClass as array in /home1/kumarstu/public_html/application/controllers/Welcome.php on line 14
+[30-Jul-2020 14:27:09 UTC] PHP Parse error:  syntax error, unexpected '}', expecting ')' in /home1/kumarstu/public_html/application/controllers/Insert.php on line 126
+[30-Jul-2020 14:49:54 UTC] PHP Fatal error:  Cannot use object of type stdClass as array in /home1/kumarstu/public_html/application/controllers/Welcome.php on line 14
+[30-Jul-2020 14:50:28 UTC] PHP Fatal error:  Cannot use object of type stdClass as array in /home1/kumarstu/public_html/application/views/include/nav.php on line 17
+[30-Jul-2020 14:50:29 UTC] PHP Fatal error:  Cannot use object of type stdClass as array in /home1/kumarstu/public_html/application/views/include/nav.php on line 17
+[30-Jul-2020 14:50:39 UTC] PHP Fatal error:  Cannot use object of type stdClass as array in /home1/kumarstu/public_html/application/views/include/nav.php on line 17
+[30-Jul-2020 14:50:44 UTC] PHP Fatal error:  Cannot use object of type stdClass as array in /home1/kumarstu/public_html/application/views/include/nav.php on line 17
+[30-Jul-2020 14:51:01 UTC] PHP Fatal error:  Cannot use object of type stdClass as array in /home1/kumarstu/public_html/application/views/include/nav.php on line 17
+[30-Jul-2020 14:52:10 UTC] PHP Fatal error:  Cannot use object of type stdClass as array in /home1/kumarstu/public_html/application/views/include/nav.php on line 17
+[30-Jul-2020 14:52:46 UTC] PHP Fatal error:  Cannot use object of type stdClass as array in /home1/kumarstu/public_html/application/controllers/Welcome.php on line 14
+[30-Jul-2020 14:54:03 UTC] PHP Fatal error:  Cannot use object of type stdClass as array in /home1/kumarstu/public_html/application/controllers/Welcome.php on line 57
+[30-Jul-2020 14:54:46 UTC] PHP Fatal error:  Cannot use object of type stdClass as array in /home1/kumarstu/public_html/application/views/include/nav.php on line 17
+[30-Jul-2020 14:55:39 UTC] PHP Fatal error:  Cannot use object of type stdClass as array in /home1/kumarstu/public_html/application/views/product.php on line 45
+[30-Jul-2020 14:56:29 UTC] PHP Fatal error:  Cannot use object of type stdClass as array in /home1/kumarstu/public_html/application/views/product.php on line 56
+[30-Jul-2020 14:56:55 UTC] PHP Fatal error:  Cannot use object of type stdClass as array in /home1/kumarstu/public_html/application/views/include/footerlink.php on line 3
+[30-Jul-2020 14:56:58 UTC] PHP Fatal error:  Cannot use object of type stdClass as array in /home1/kumarstu/public_html/application/controllers/Cart.php on line 20
+[30-Jul-2020 14:58:09 UTC] PHP Fatal error:  Cannot use object of type stdClass as array in /home1/kumarstu/public_html/application/views/include/footerlink.php on line 3
+[30-Jul-2020 14:58:53 UTC] PHP Fatal error:  Cannot use object of type stdClass as array in /home1/kumarstu/public_html/application/controllers/User.php on line 18
+[30-Jul-2020 14:59:35 UTC] PHP Fatal error:  Cannot use object of type stdClass as array in /home1/kumarstu/public_html/application/views/profile.php on line 23
+[30-Jul-2020 15:08:52 UTC] PHP Fatal error:  Cannot use object of type stdClass as array in /home1/kumarstu/public_html/application/controllers/Cart.php on line 48
+[31-Jul-2020 09:36:32 UTC] PHP Fatal error:  Cannot use object of type stdClass as array in /home1/kumarstu/public_html/application/views/product.php on line 61
