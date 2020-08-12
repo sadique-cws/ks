@@ -18,7 +18,7 @@
                     <div class="card-content">
                        <h1 class="ks-font h2">Welcome Back</h1>
                             <p class="small font-style">Login with your email/Mobile and password </p>
-                        <form action="<?= base_url('auth/login');?>" method="post">
+                        <?= form_open('auth/login');?>
                             <div class="row">
                             <div class="col s12">
                               <div class="row">
@@ -38,8 +38,8 @@
                               </div>
                             </div>
                           </div>
-                        </form>
-                        <a href="" class="red-text text-darken-3">Forget Password?</a>
+                        <?= form_close();?>
+                        <a href="<?= base_url('auth/forget_password');?>" class="red-text text-darken-3">Forget Password?</a>
                     </div>
                 </div>
             </div>

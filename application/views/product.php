@@ -94,17 +94,18 @@
         <div class="card">
                     <div class="p-2" >Bulk Enquiry</div>
                     <div class="card-content p-2 m-0">
-                        <form action="">
+                        <form action="<?= base_url('welcome/CreateEnquiry/'.$product->slug);?>" method="post">
                              <div class="row mb-0">
                             <div class="col s12">
                               <div class="row">
                                 <div class="input-field col s12">
-                                  <input type="text" id="contact" name="contact">
-                                  <label for="contact">Name</label>
+                                  <input type="text" id="name" name="name">
+                                  <input type="hidden" name="product_id" value="<?= $product->id;?>">
+                                  <label for="name">Name</label>
                                 </div>
                                <div class="input-field col s12">
-                                  <input type="password" id="password" name="password">
-                                  <label for="password">Contact</label>
+                                  <input type="text" id="contact" name="contact">
+                                  <label for="contact">Contact</label>
                                 </div>
                                 <div class="input-field col s12">
                                   <input type="submit" name="login" value="Callback Request" class="btn red darken-3 w-100">
@@ -161,7 +162,7 @@
 						<?php endif;?>
                     </div>
                     <div class="card-content pt-3">
-                        <a href="<?= base_url('welcome/product/'.$pro->slug);?>" class="stretched-link black-text font-weight-bolder">
+                        <a href="<?= base_url('p/'.$pro->slug);?>" class="stretched-link black-text font-weight-bolder">
                                 <h2 class="h6 ks-font text-truncate"><?= $pro->name;?></h2>
                                 <p class="font-style">
                                     <span class="red-text text-darken-3">₹. <?= $pro->discount_price;?>/- </span> 
@@ -180,7 +181,7 @@
     <div class="container-fluid px-lg-5 px-1 w-100 mt-3" id="about">
         <div class="row mb-0">
             <div class="col s12">
-                <h5 class="text-uppercase grey-text text-darken-3">Product Details</h5>
+                <h6 class="text-uppercase ks-font grey-text text-darken-3 redheading">Product Details</h6>
             </div>
         </div>
         <div class="row">

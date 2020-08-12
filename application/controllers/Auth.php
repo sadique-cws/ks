@@ -124,6 +124,101 @@ class Auth extends CI_Controller {
 
             }
         }
+
+      
+
+    
+    public function forget_password(){
+        $this->form_validation->set_rules('contact', 'contact', 'required|exact_length[10]');
+
+        if($this->form_validation->run() == true) {
+            $to = $this->input->post('contact');
+            $otp = create_ref(6);
+            $message = "Yours OTP is $otp. Please Don't Share your OTP. \n Thank You";
+
+        
+
+            if($this->msg91->send($to, $message) == TRUE)  {
+                    $this->session->set_flashdata('msg', ' Hooray! OTP Sent');
+                    $this->session->set_userdata('forget_otp',$otp);
+                    $this->session->set_userdata('user_log',$to);
+                    redirect('auth/forget_verify');
+                }
+                 else{
+
+                    $this->session->set_flashdata('msg', 'Oops! Message  not sent.');
+                    redirect('auth/forget_password');
+
+                }
+
+        }
+        else{            
+                $this->load->view("forget_password",$this->data);
+
+
+            }
+        }
+
+      
+  
+    public function forget_verify(){
+        if(!$this->session->userdata('user_log')){
+            redirect('auth/forget_password');
+        }
+        
+        $this->form_validation->set_rules('otp', 'otp', 'required|exact_length[6]');
+
+        if ($this->form_validation->run() == true) {
+			 $otp = $this->input->post('otp');
+			
+			
+            if($_SESSION['forget_otp'] == $otp)  {
+					$this->session->unset_userdata('forget_otp');
+					redirect('auth/new_password');
+				}
+				 else{
+
+					$this->session->set_flashdata('msg', 'Oops! invalid/Expired otp.');
+					redirect('auth/forget_verify');
+
+				}
+
+        }
+        else{            
+				$this->load->view("forget_verify",$this->data);
+
+
+            }
+        }
+
+        public function new_password(){
+            if(!$this->session->userdata('user_log')){
+                redirect('auth/forget_password');
+            }
+            else{
+                $log = $this->session->userdata('user_log');
+                $getUser = $this->work->callingData("users",["contact"=>$log]);
+
+                $this->form_validation->set_error_delimiters("<span class='small red-text'>","</span>");
+                $this->form_validation->set_rules('password','Password','required|min_length[6]');
+                $this->form_validation->set_rules('password2','confirm Password','required|matches[password]');
+
+
+                if($this->form_validation->run()){
+                    $data = [
+                        'password' => $this->input->post('password')
+                    ];
+
+                    $this->work->update('users',$data,array('contact'=>$log));
+
+                    $this->session->set_userdata("user",$log);
+                    redirect('welcome/index');
+                }
+                else{
+                    $this->load->view('new_password',$this->data);
+                }
+            }
+        }
   
     public function verify(){
             
@@ -132,23 +227,23 @@ class Auth extends CI_Controller {
         $this->form_validation->set_rules('otp', 'otp', 'required|exact_length[6]');
 
         if ($this->form_validation->run() == true) {
-			echo $otp = $this->input->post('otp');
-			
-			
+             $otp = $this->input->post('otp');
+            
+            
             if($_SESSION['signup_otp'] == $otp)  {
-					$this->session->unset_userdata('signup_otp');
-					redirect('auth/register');
-				}
-				 else{
+                    $this->session->unset_userdata('signup_otp');
+                    redirect('auth/register');
+                }
+                 else{
 
-					$this->session->set_flashdata('msg', 'Oops! invalid/Expired otp.');
-					redirect('auth/verify');
+                    $this->session->set_flashdata('msg', 'Oops! invalid/Expired otp.');
+                    redirect('auth/verify');
 
-				}
+                }
 
         }
         else{            
-				$this->load->view("verify",$this->data);
+                $this->load->view("verify",$this->data);
 
 
             }

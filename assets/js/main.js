@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('.Bulk');
-    var instances = M.Modal.init(elems, []);
+    var instances = M.Modal.init(elems, { });
   });
 
 

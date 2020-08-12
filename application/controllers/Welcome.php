@@ -82,5 +82,33 @@ class Welcome extends CI_Controller {
 	public function contact(){
 		$this->load->view('contact');
 	}
+
+	public function CreateEnquiry($slug=null){
+        $this->form_validation->set_rules('name','name','required');
+        $this->form_validation->set_rules('contact','contact','required|exact_length[10]');
+
+
+        if($this->form_validation->run()){
+            $data = [
+                'enquiry_name' => $_POST['name'],
+                'enquiry_contact' => $_POST['contact'],
+                'product_id' => $_POST['product_id']
+            ];
+            $this->msg91->send($_POST['enquiry_contact'],"Hi ". $_POST['enquiry_name'] . " Thank you, we received your inquiry for bulk customized gift We well call back soon \n Regards \n Kumar Studio Gifts");
+        	 $this->session->set_flashdata("msg","Thank you, we will call back soon");
+            $this->work->insertData('bulk_enquiry',$data);     
+        }
+        else{
+        	 $this->session->set_flashdata("msg",form_error('name') ." | " .form_error('contact'));
+        }
+    	if( $this->session->userdata('redirect_back') ) {
+                $redirect_url = $this->session->userdata('redirect_back');  
+                $this->session->unset_userdata('redirect_back');
+               redirect($redirect_url);
+		}
+        else{
+           redirect("welcome/index");
+        }       
+    }
 	
 }

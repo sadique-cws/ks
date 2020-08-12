@@ -16,23 +16,26 @@
             <div class="col s12 l4 offset-l4">
                 <div class="card">
                     <div class="card-content">
-                       <h6>Signup</h6>
-                       <?= form_open('auth/verify');?>
+                       <h6>Create New Password</h6>
+                       <?= form_open('auth/new_password');?>
                             <div class="row">
                             <div class="col s12">
                               <div class="row">
-                            <div class="input-field col s12">
-                                  <i class="material-icons prefix">local_phone</i>
-                                  <input type="tel" id="otp" name="otp" placeholder="OTP">
-								  <?php if(form_error('otp')):?>
-									<span class="helper-text" data-error="wrong"><?= form_error('otp');?></span>
-								  <?php else: ?>
-									<span class="helper-text" data-error="wrong" data-success="right">enter a valid OTP no</span>
-								  <?php endif;?>
-                                  
-                                </div>
+
+                              <div class="input-field col s12">
+                                    <input type="password" name="password" id="password" autofocus>
+                                    <label for="password">New Password</label>
+        								            <?= form_error('password');?>
+                              </div>
+                                
+                              <div class="input-field col s12">
+                                    <input type="password" name="password2">
+                                    <label for="password2">Confirm Password</label>
+                                    <?= form_error('password2');?>
+                              </div>
+
                                 <div class="input-field col s12">
-                                  <input type="submit" class="btn red darken-3 w-100" value="Verify">
+                                  <input type="submit" class="btn red darken-3 w-100" value="Change">
                                 </div>
                               </div>
                             </div>

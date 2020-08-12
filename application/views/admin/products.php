@@ -46,9 +46,9 @@
                             
                         </div>
                         <div class="col-12 col-lg-1">
-                            <a href="<?= base_url('admin/product/'.$pro->slug);?>"><span class="badge badge-pill bg-primary">View</span></a>
+                            <a href="<?= base_url('admin/p'.$pro->slug);?>"><span class="badge badge-pill bg-primary">View</span></a>
                             
-                            <a href="<?= base_url('admin/edit_product/'.$pro->slug);?>"><span class="badge badge-pill bg-secondary">edit</span></a>
+                            <a href="<?= base_url('admin/edit_p'.$pro->slug);?>"><span class="badge badge-pill bg-secondary">edit</span></a>
                         </div>
                        
                         <div class="col-12 col-lg-1 small">₹. <?= $pro->discount_price;?> <span class="text-danger"><del><?= $pro->price;?> </del></span></div>

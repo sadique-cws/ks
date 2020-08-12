@@ -31,14 +31,17 @@ class User extends CI_controller{
 	}    
     public function index(){
          $user_id = $this->user_id;
-        $this->data['order'] = $this->work->callingQuery("SELECT * from orders JOIN payment ON orders.order_id = payment.order_id where orders.user_id='$user_id'  AND orders.ordered=true ORDER BY orders.ordered_date DESC");
+        $this->data['order'] = $this->work->callingQuery("SELECT * from orders JOIN payment ON orders.order_id = payment.order_id where orders.user_id='$user_id'  AND orders.ordered='1' ORDER BY orders.ordered_date DESC");
         $this->data['orderitem'] = $this->work->callingQuery(" 
                                                 select * from orderitem JOIN products ON 
                                                 orderitem.product_id = products.id 
-                                                where user = '$user_id' and ordered = true");
+                                                where user = '$user_id' and ordered ='1'");
         
         $this->load->view('myorders',$this->data);
     }
+
+ 
+    
 
 
 }

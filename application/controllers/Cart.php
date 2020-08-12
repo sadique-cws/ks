@@ -116,7 +116,7 @@ class Cart extends CI_controller {
 
     public function empty_pincode( $slug = null ) {
 		$order_query = $this->work->update( 'users', array( 'user_pincode'=>null ), array( 'user_id'=>$this->user_id ) );
-            $this->redirect_next( 'welcome/product/'.$slug );
+            $this->redirect_next( 'p'.$slug );
     }
 
     private function redirect_next( $page = null ) {
@@ -170,7 +170,7 @@ class Cart extends CI_controller {
                 $this->session->set_flashdata( 'msg', 'sorry this product is not available in your area' );
                
             }
-			 redirect( 'welcome/product/'.$slug );
+			 redirect( 'p'.$slug );
             #todo: check pin code
 
         }
@@ -207,12 +207,12 @@ class Cart extends CI_controller {
                     'qty' =>$qty,
                 ),
                 array(
-                    'id'=>$orderItemCheck->id
+                    'orderitem_id'=>$orderItemCheck->orderitem_id
                 ) );
             }
 
             $this->session->set_flashdata( 'msg', 'Product added Successfully' );
-            redirect( 'Cart/index' );
+           redirect( 'Cart/index' );
         }
 
     public function remove_from_cart( $slug = null ) {
@@ -223,7 +223,7 @@ class Cart extends CI_controller {
                                             user = '$user_id' and
                                             ordered = false and
                                             products.slug = '$slug'" );
-        $delete_query = $this->work->deleteData( 'orderitem', array( 'id'=>$orderitem[0]->id ) );
+        $delete_query = $this->work->deleteData( 'orderitem', array( 'orderitem_id'=>$orderitem[0]->orderitem_id ) );
 
         if ( $delete_query ) {
             $this->session->set_flashdata( 'msg', 'item deleted sucessfully' );
@@ -242,7 +242,7 @@ class Cart extends CI_controller {
                                             ordered = false and
                                             products.slug = '$slug'" );
 
-        $update_query = $this->work->update( 'orderitem', array( 'qty'=>$orderitem[0]->qty -= 1 ), array( 'id'=>$orderitem[0]->id ) );
+        $update_query = $this->work->update( 'orderitem', array( 'qty'=>$orderitem[0]->qty -= 1 ), array( 'orderitem_id'=>$orderitem[0]->orderitem_id ) );
 
         if ( $orderitem[0]->qty > 0 ) {
             if ( $update_query ) {
@@ -394,7 +394,7 @@ class Cart extends CI_controller {
                 redirect( 'cart/PaytmGateway/'.create_ref(6));
 
             } else {
-                $this->data['address'] = $this->work->callingData( 'address', array( 'user_id'=>$this->user_id ) );
+                $this->data['address'] = $this->work->callingQuery("SELECT * FROM address WHERE user_id='" . $this->user_id."'");
                 $this->load->view( 'checkout', $this->data );
             }
         }

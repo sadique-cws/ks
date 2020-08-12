@@ -14,14 +14,11 @@
         <div class="row">
             <div class="col-lg-12">
               <div class="row">
-                   <div class="col-lg-8">
+                   <div class="col-lg-3">
                         <h5>Manage Categories</h5>
                     </div>
-                    <div class="col-lg-4">
-                        <div class="btn-group">
-                            <a href="" class="btn btn-info">Export</a>
-                            <a href="" class="btn btn-warning">Print</a>
-                            <?= anchor_popup('admin/categories/insert/',"Add New",[
+                    <div class="col-lg-2 offset-lg-7">
+                        <?= anchor_popup('admin/categories/insert/',"Add New",[
                             "class"=>"btn btn-success",
                             'screenx'   =>  '\'+((parseInt(screen.width) - 500)/2)+\'',
                             'screeny'   =>  100,
@@ -30,13 +27,13 @@
                             'status'    => 'yes',
                             ]);?>
                         </div>
-                    </div>
               </div>
-                <table class="table table-sm table-striped">
+                <table class="table table-sm table-striped table-bordered">
                     <thead>
                         <tr>
                         <th>Id</th>
                         <th>Name</th>
+                        <th>Slug</th>
                         <th>Action</th>
                     </tr>
                     </thead>

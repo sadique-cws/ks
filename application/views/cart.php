@@ -11,7 +11,7 @@
 
 <body>
     <?php include_once('include/nav.php');?>
-    <div class="container-fluid px-lg-5 p-1 w-100 mt-3">
+    <div class="container px-lg-5 px-0 mt-3">
         <div class="row">
             <div class="col s12">
                 <h5 class="ks-font">My Carts</h5>
@@ -24,13 +24,13 @@
                         foreach($orderitem as $item):
                     ?>
                 <div class="col s12 m12">
-                    <div class="card horizontal">
+                    <div class="card horizontal mb-0">
                         <div class="card-image" style="width:10%;important">
                             <img src="<?= base_url('assets/image/products/'.$item->image);?>" alt="" class="w-100">
                         </div>
-                        <div class="card-stacked">
+                        <div class="card-stacked mb-0 mt-n3">
                             <div class="card-content py-0">
-                                <h6><?= $item->name;?></h6>
+                                <h6 class="small ks-font"><?= $item->name;?></h6>
                                 <p class="font-style">
                                     <span class="red-text text-darken-3 font-weight-bolder ">₹. <?= $item->discount_price * $item->qty;?>/- </span>
                                     <span class="grey-text small"><del>₹. <?= $item->price * $item->qty;?>/-</del></span>
@@ -57,8 +57,15 @@
                     </div>
                     <?php 
 if($item->attachment):?>
-
-    <button type="button" class="btn grey darken-2">Attach Photo </button>
+    <?= form_open_multipart('user/item_image_upload/');?>
+      <div class="file-field input-field my-0">
+        <div class="chip lime accent-3 grey-text text-darken-4">
+            <span><i class="material-icons left mx-1 mt-1">image</i> Upload Photo </span>
+            <input type="hidden" value="<?= $item->orderitem_id;?>">
+            <input type="file">
+        </div>
+    </div>
+<?= form_close();?>
 <?php endif;?>
  <hr style="border:1px solid #ddd">
 
@@ -75,32 +82,32 @@ if($item->attachment):?>
                     
                     <li class="collection-item grey lighten-2">Coupon Discount: (<?= $order[0]->discount;?>%)  <span class="right">₹. <?= $get_coupon_amount;?>/-</span></li>
                     <?php endif;?>
-                    <li class="collection-item green lighten-3">Total Saving: <span class="right">₹. <?= $get_total_saving_amount;?>/-</span></li>
-                    <li class="collection-item font-weight-bolder">Total Payable Amount: <span class="right">₹. <?=$total_payable_amount;?>/-</span></li>
+                    <li class="collection-item green lighten-2">Total Saving: <span class="right">₹. <?= $get_total_saving_amount;?>/-</span></li>
+                    <li class="collection-item font-weight-bolder">Net Payable Amount: <span class="right">₹. <?=$total_payable_amount;?>/-</span></li>
                 </ul>
                 <div class="row">
-                    <div class="col s7">
-                        <a href="<?= base_url('welcome/index');?>" class="btn light-blue w-100">
+                   
+                    <div class="col s5 l12"><a href="<?= base_url('cart/checkout/');?>" class="btn green darken-3 small w-100 mt-2">Order Now</a></div>
+                     <div class="col s7 l12">
+                        <a href="<?= base_url('welcome/index');?>" class="btn orange w-100 small mt-2">
                             <span class="material-icons left mt-1">shopping_basket</span>
                             More Shopping</a>
                     </div>
-                    <div class="col s5"><a href="<?= base_url('cart/checkout/');?>" class="btn orange w-100">Checkout</a></div>
                 </div>
     <?php 
                 if($order[0]->coupon==null): ?>
                 <div class="card  pt-1 pb-0" style="border:1px solid #ddd">
-                    <div class="card-content py-2" >
+                    <div class="card-content py-1" >
                         <form action="<?= base_url('cart/add_coupon');?>" method="post">
                            <div class="row">
-                               <div class="col s8 l9">
-                                    <div class="input-field">
-                                <input id="coupon" type="text" name="coupon" class="validate" value="">
-                                <label for="coupon">Apply Coupon (if any)</label>
+                               <div class="col s12">
+                                    <div class="input-field my-0">
+                                <input id="coupon" type="text" name="coupon" class="validate" value="" placeholder="Apply Coupon">
                             </div>
                                </div>
-                               <div class="col s4 l3">
-                            <div class="input-field">
-                                <input type="submit" class="btn green darken-3 mt-1" value="Redeem">
+                               <div class="col s12">
+                            <div class="input-field  my-0">
+                                <input type="submit" class="btn grey darken-3 w-100" value="Redeem">
                             </div>
                                </div>
                            </div>
@@ -119,7 +126,7 @@ if($item->attachment):?>
                 <div class="col s12">
                     <div class="card text-center">
                         <div class="card-content ks-font">
-                            <h1>Your Cart is Empty</h1>
+                            <h1 class="h3 ks-font">Your Cart is Empty</h1>
                             <a href="<?= base_url('welcome/index');?>" class="btn green darken-2 ">Continue Shopping</a>
                         </div>
                     </div>

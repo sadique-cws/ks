@@ -12,11 +12,8 @@
 <body>
     <?php include_once('include/nav.php');?>
 
-                <div class="carousel carousel-slider">
-                    <a class="carousel-item" href="#one!"><img src="<?= base_url('assets/img/banner/template.png');?>"></a>
-                    <a class="carousel-item" href="#two!"><img src="<?= base_url('assets/img/banner/template.png');?>"></a>
-                </div>
-           
+               <img src="<?= base_url('assets/img/banner/template.png');?>" class="w-100">
+
     <div class="container-fluid px-1 px-lg-5 mt-4">
         <div class="row">
             <div class="col s12 text-center">
@@ -44,37 +41,46 @@
     </div>
     <div class="container-fluid px-lg-5 w-100 mt-3">
         <div class="row mb-0">
-            <div class="col s12 text-center">
-                <h5 class="grey-text text-darken-2 h3 ks-font heading">Feature Products</h5>
-            </div>
         </div>
-        <div class="row">
-            <?php foreach($products as $pro):?>
-            <div class="col l2 s6">
-                <div class="card z-depth-1 product" >
-                    <div class="card-image">
-                        <img src="<?= base_url('assets/image/products/'.$pro->image);?>" class="w-100" style="height: 180px;object-fit: cover;">
-                        <?php if($pro->same_day):?>
-						<a class="upper-label white-text red darken-2 ks-font">Same day Delivery</a>
-						<?php endif;?>
-                        <?php if($pro->next_day):?>
-						<a class="upper-label white-text red darken-2 ks-font">Next day Delivery</a>
-						<?php endif;?>
-                    </div>
-                    <div class="card-content pt-3">
-                        <a href="<?= base_url('welcome/product/'.$pro->slug);?>" class="stretched-link black-text font-weight-bolder">
-                                <h2 class="h6 ks-font text-truncate"><?= $pro->name;?></h2>
-                                  <p class="font-style">
-                                    <span class="red-text text-darken-3 font-weight-bolder small font-style left">₹. <?= $pro->discount_price ?>/- </span>
-									<?php if($pro->discount_price > 0):?>
-										<span class="green-text text-darken-3 ks-font small right">(<?= round(100-($pro->discount_price/$pro->price)*100);?>% off)</span>
+        
+              <?php foreach($categories as $cat): ?>
+                    <div class="row">
+                    
 
-									<?php endif;?>
-                                </p>
-                        </a>
-                    </div>
-                </div>
+            <div class="col s12 text-center">
+                <h5 class="grey-text text-darken-2 h5 font-style heading"><?= $cat->cat_title;?></h5>
             </div>
+
+                    <?php foreach($products as $pro): ?>
+                       <?php if($cat->cat_id == $pro->category):?>
+                    <div class="col l3 s6">
+                        <div class="card z-depth-0 product" >
+                            <div class="card-image">
+                                <img src="<?= base_url('assets/image/products/'.$pro->image);?>" class="w-100" style="height: 280px;object-fit: cover;">
+                                <?php if($pro->same_day):?>
+        						<a class="upper-label white-text red darken-2 ks-font">Same day Delivery</a>
+        						<?php endif;?>
+                                <?php if($pro->next_day):?>
+        						<a class="upper-label white-text red darken-2 ks-font">Next day Delivery</a>
+        						<?php endif;?>
+                            </div>
+                            <div class="card-content pt-3">
+                                <a href="<?= base_url('p/'.$pro->slug);?>" class="stretched-link black-text font-weight-bolder">
+                                        <h2 class="h6 ks-font text-truncate"><?= $pro->name;?></h2>
+                                          <p class="font-style">
+                                            <span class="red-text text-darken-3 font-weight-bolder small font-style left">₹. <?= $pro->discount_price ?>/- </span>
+        									<?php if($pro->discount_price > 0):?>
+        										<span class="green-text text-darken-3 ks-font small right">(<?= round(100-($pro->discount_price/$pro->price)*100);?>% off)</span>
+
+        									<?php endif;?>
+                                        </p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <?php endif;?>
+                <?php endforeach;?>
+                    </div>
             <?php endforeach;?>
         </div>
     </div>

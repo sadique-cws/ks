@@ -13,7 +13,7 @@
     <?php include_once('include/nav.php');
     
     ?>
-        <div class="container-fluid px-lg-5 px-1 mt-3">
+        <div class="container px-lg-5 px-0 mt-3">
             <div class="row">
                 <div class="col s12 ">
                     <h5 class="ks-font">Checkout</h5>
@@ -22,8 +22,7 @@
                 <div class="col s12 l8">
                     <?php 
                 if(!empty($address)):?>
-                        <form action="<?= base_url('cart/checkout');?>" method="post">
-                            <div class="row">
+                        <?= form_open('cart/checkout');?>
                                 <?php
                     foreach($address as $ad):?>
                                     <div class="col s12">
@@ -38,14 +37,17 @@
                                     </div>
                                     <?php endforeach;?>
                             </div>
-                            <input type="submit" class="btn right orange darken-3 mt-n3" value="Proceed to pay"> </form>
+                            <input type="submit" class="btn right orange darken-3 mt-n3" value="Proceed to pay"> 
+                     <?= form_close();?>
                         <div class="clearfix"></div>
+                        <hr class="mt-2">
+                        <h6 class="text-center pb-2">OR</h6>
                         <hr>
                         <?php endif;?>
-                            <div class="card mt-5 grey lighten-4">
+                            <div class="card mt-4 grey lighten-4">
                                 <div class="card-content">
                                     <h6>Fill address details for checkout</h6>
-                                    <form action="<?= base_url('cart/checkout/');?>" method="post">
+                                    <?= form_open('cart/checkout/');?>
                                         <div class="row">
                                             <div class="col s12">
                                                 <div class="row">
@@ -79,21 +81,21 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </form>
+                        <?= form_close();?>
                                 </div>
                             </div>
                 </div>
                 <div class="col s12 l4">
                     <div class="card">
                         <div class="card-content p-0 m-0">
-                            <h6 class="px-3 py-2">Your Carts</h6>
+                            <h6 class="px-3 py-0">Your Carts</h6>
                             <ul class="collection">
                                 <?php foreach($orderitem as $item): ?>
                                     <li class="collection-item">
                                         <?= $item->name;?> <span class="right small">(<?= $item->discount_price;?> X <?= $item->qty;?>)</span></li>
                                     <?php endforeach;  ?>
                                         <li class="collection-item red-text text-darken-3">
-                                            <h5>Total Amount <span class="right">₹. <?= $total_payable_amount;?></span></h5> </li>
+                                            <h5 class="h6">Total Amount <span class="right">₹. <?= $total_payable_amount;?></span></h5> </li>
                             </ul>
                         </div>
                     </div>

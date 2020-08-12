@@ -17,13 +17,13 @@
                 <div class="card">
                     <div class="card-content">
                        <h6>Signup</h6>
-                       <?= form_open('auth/verify');?>
+                        <?= form_open('auth/forget_verify');?>
                             <div class="row">
                             <div class="col s12">
                               <div class="row">
                             <div class="input-field col s12">
                                   <i class="material-icons prefix">local_phone</i>
-                                  <input type="tel" id="otp" name="otp" placeholder="OTP">
+                                  <input type="tel" id="otp" name="otp" placeholder="OTP" autofocus>
 								  <?php if(form_error('otp')):?>
 									<span class="helper-text" data-error="wrong"><?= form_error('otp');?></span>
 								  <?php else: ?>

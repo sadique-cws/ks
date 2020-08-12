@@ -7,7 +7,7 @@
             <a href="<?= base_url('admin/orders');?>" class="nav-item nav-link">Orders</a>
             <a href="<?= base_url('admin/coupons');?>" class="nav-item nav-link">Coupon</a>
             <a href="<?= base_url('admin/offers');?>" class="nav-item nav-link">Offers</a>
-            <a href="<?= base_url('admin/coupons');?>" class="nav-item nav-link">Bulk Enquiry</a>
+            <a href="<?= base_url('admin/bulk_enquiry');?>" class="nav-item nav-link">Bulk Enquiry</a>
         </div>
     </div>
 </nav>

@@ -243,7 +243,37 @@ class Admin extends CI_controller{
         WHERE orders.ordered=true');
         $this->load->view('admin/orders',$data);           
     }
-    
+    public function order_view($order_id=null){
+        $data['order'] = $this->work->callingQuery("SELECT * FROM orders JOIN users 
+                                                                ON orders.user_id = users.user_id 
+                                                                JOIN coupon 
+                                                                on orders.coupon = coupon.coupon_id  
+                                                                JOIN payment 
+                                                                ON orders.order_id = payment.order_id WHERE orders.ordered=true AND orders.order_id='$order_id'");
+
+        $user_id = $data['order'][0]->user_id;      
+        $data['orderitem'] = $this->work->callingQuery("SELECT * FROM orderitem JOIN products ON orderitem.product_id=products.id WHERE order_id='$order_id' AND user='$user_id' AND ordered=true");
+        
+        $data['payment'] = $this->work->callingQuery("SELECT * FROM payment WHERE order_id='$order_id' AND user_id='$user_id'");
+        $this->load->view('admin/order_view',$data);           
+    }
+    public function bulk_enquiry(){
+        $data['enquiry'] = $this->work->callingQuery('SELECT * FROM bulk_enquiry JOIN products ON bulk_enquiry.product_id = products.id');
+        $this->load->view('admin/bulk_enquiry',$data);
+
+    }
+
+
+    public function changeOrderStatus($order_id){
+        if(isset($_POST['changestate'])){
+            $status_id = $this->input->post('status');
+
+
+            $this->work->update('orders',array('order_status'=>$status_id),array("order_id"=>$order_id));
+
+            redirect('admin/order_view/'.$order_id);
+        }
+    }
     public function coupons($action=null){
         //calling products
         if($action==null):

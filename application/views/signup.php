@@ -17,7 +17,7 @@
                 <div class="card">
                     <div class="card-content">
                        <h6>Signup</h6>
-                        <form action="<?= base_url('auth/signup');?>" method="post">
+                        <?= form_open('auth/signup');?>
                             <div class="row">
                             <div class="col s12">
                               <div class="row">
@@ -25,7 +25,7 @@
                                   <i class="material-icons prefix">local_phone</i>
                                   <input type="tel" id="contact" name="contact" placeholder="Mobile No">
 								  <?php if(form_error('contact')):?>
-									<span class="helper-text" data-error="wrong"><?= form_error('contact');?></span>
+									<span class="helper-text invalid " data-error="wrong"><?= form_error('contact');?></span>
 								  <?php else: ?>
 									<span class="helper-text" data-error="wrong" data-success="right">enter a valid contact no</span>
 								  <?php endif;?>
@@ -37,7 +37,7 @@
                               </div>
                             </div>
                           </div>
-                        </form>
+                        <?= form_close();?>
                         <a href="<?= base_url('auth/login');?>" class="red-text text-darken-3">Already have an Account?</a>
                     </div>
                 </div>

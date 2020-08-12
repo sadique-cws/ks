@@ -17,7 +17,7 @@
                 <div class="card">
                     <div class="card-content">
                        <h6>Signup Now</h6>
-                        <form action="<?= base_url('auth/register');?>" method="post">
+                        <?= form_open('auth/register');?>
                             <div class="row">
                             <div class="col s12">
                               <div class="row">
@@ -64,7 +64,7 @@
                               </div>
                             </div>
                           </div>
-                        </form>
+                        <?= form_close();?>
                     </div>
                 </div>
             </div>
