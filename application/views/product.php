@@ -94,7 +94,7 @@
         <div class="card">
                     <div class="p-2" >Bulk Enquiry</div>
                     <div class="card-content p-2 m-0">
-                        <form action="<?= base_url('welcome/CreateEnquiry/'.$product->slug);?>" method="post">
+                      <?= form_open('welcome/CreateEnquiry/'.$product->slug);?>
                              <div class="row mb-0">
                             <div class="col s12">
                               <div class="row">
@@ -113,7 +113,7 @@
                               </div>
                             </div>
                           </div>
-                        </form>
+                       <?= form_close();?>
                     </div>
                 </div>
     </div>

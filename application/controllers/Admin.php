@@ -141,7 +141,7 @@ class Admin extends CI_controller{
          $config = array(
             'upload_path' => "./assets/image/".$folder."/",
             'allowed_types' => "gif|jpg|jpeg|png",
-            'overwrite' => TRUE,
+            'overwrite' => FALSE,
             'max_size' => "2048000", 
             'max_height' => "768",
             'max_width' => "1024"
@@ -150,28 +150,27 @@ class Admin extends CI_controller{
     $this->load->library('upload', $config);
     if ( ! $this->upload->do_upload($filename)) {
         $error = array('error' => $this->upload->display_errors());
-        print_r($error);
     return false;
     } else {
     $data = array('upload_data' => $this->upload->data());
-    return true;
+    return $data;
     }
 }
 
     public function change_product_image($slug=null){
           if ($this->input->post('product_image')){
             if(isset($_FILES['image']) && $_FILES['image']['name'] !=""){
-                $this->upload_image('image');
+                $data = $this->upload_image('image');
                 $fields = array(
-                    'image' => $_FILES['image']['name']
+                    'image' => $data['upload_data']['file_name']
                 );
                 $this->work->update('products',$fields,array('slug'=>$slug));
                
             }
             if(isset($_FILES['image1']) && $_FILES['image1']['name'] !=""){
-                 $this->upload_image('image1');
+                 $data = $this->upload_image('image1');
                     $fields = array(
-                    'image1' => $_FILES['image1']['name']
+                    'image1' => $data['upload_data']['file_name']
                 );
                 $this->work->update('products',$fields,array('slug'=>$slug));
                
@@ -370,23 +369,13 @@ class Admin extends CI_controller{
             $this->form_validation->set_rules('cat_title','name','required');
             
             
-         $config = array(
-            'upload_path' => "./assets/image/cat/",
-            'allowed_types' => "gif|jpg|png|jpeg|pdf",
-            'overwrite' => TRUE,
-            'max_size' => "2048000", // Can be set to particular file size , here it is 2 MB(2048 Kb)
-            'max_height' => "768",
-            'max_width' => "1024"
-        );
-            $this->load->library('upload', $config);
-         
-        if($this->upload->do_upload('cat_image')){
-            if($this->form_validation->run()){
+          $data = $this->upload_image('cat_image','cat');
+          if($this->form_validation->run()){
                 $fields = array(
                     'cat_title' => $_POST['cat_title'],
                     'cat_description' => $_POST['cat_description'],
                     'cat_slug' => slugify($_POST['cat_title']),
-                    'cat_image' => $_FILES['cat_image']['name']
+                    'cat_image' => $data['upload_data']['file_name']
                 );
                 
                 if($this->work->insertData('categories',$fields)){
@@ -400,12 +389,7 @@ class Admin extends CI_controller{
                 $this->session->set_flashdata("danger","Try Again or Check data");
                 //redirect('admin/products/');
             }
-        }
-        else{
-            $error = array('error' => $this->upload->display_errors());
-                $this->load->view('admin/insert_category.php',$error);
-        }
-        //exception
+        
         
         else:
             redirect('admin/categories');
@@ -422,9 +406,9 @@ class Admin extends CI_controller{
             
             if(isset($_FILES['cat_image']) && $_FILES['cat_image']['name'] !=""){
                 unlink('./assets/image/cat/'.$getCategory->cat_image);
-                $this->upload_image('cat_image','cat');
+                $data = $this->upload_image('cat_image','cat');
                 $fields = array(
-                    'cat_image' => $_FILES['cat_image']['name']
+                    'cat_image' => $data['upload_data']['file_name']
                 );
                 $this->work->update('categories',$fields,array('cat_slug'=>$slug));
                 $this->session->set_flashdata("success","products updated Successfully");

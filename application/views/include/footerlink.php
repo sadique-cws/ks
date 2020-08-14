@@ -27,17 +27,17 @@
 if(!empty($user)):
 if($user->user_pincode==null):?>
 
-    <div id="modal1" class="modal pincode_modal">
-      <div class="modal-content">
-          <h4>Please Enter Pin Code</h4>
-          <form action="<?= base_url('cart/pincode_update/');?>" method="post">
+    <div id="modal1" class="modal pincode_modal mt-5" style="min-width:35%">
+      <div class="modal-content pb-0">
+          <h4 class="h6">Please Enter Pin Code</h4>
+          <?= form_open('cart/pincode_update/');?>
              <div class="row">
-                  <div class="input-field col s12 l10">
+                  <div class="input-field col s12 l9">
                   <i class="material-icons prefix">location_on</i>
                   <input type="text" id="pincode-input" name="pincode" placeholder="enter Pincode">
               </div>
-              <div class="input-field col s12 l2">
-                  <input type="submit" class="btn green darken-3 w-100 mb-3">
+              <div class="input-field col s12 l3">
+                  <input type="submit" class="btn green darken-3 w-100 mb-3" value="Go">
               </div>
              </div>
           </form>

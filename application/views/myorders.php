@@ -32,52 +32,74 @@
                                if($o->order_id == $item->order_id):
                     ?>
                             <div class="row">
-                                <div class="card-image col s2 l1"> 
+                                <div class="card-image col s2 l2"> 
                                     <img src="<?= base_url('assets/image/products/'.$item->image);?>" class="w-100"> 
                                 </div>
-                                <div class="card-stacked col s10 l11">
+                                <div class="card-stacked col s10 l10">
                                     <div class="mt-n1">
                                         <h6 class=" grey-text text-darken-3 ks-font"><?= $item->name;?></h6>
+                                          <?php 
+            if($item->attachment):?>
+                <?php  if($item->upload_image == null): ?>
+                <?= form_open_multipart('user/item_image_upload/');?>
+                 <div class="mb-2 ">
+                        <small class="ks-font">Attachment</small>
+                    </div>
+                  <div class="file-field input-field my-0">
+                    <div class="chip blue grey-text text-lighten-4">
+                        <span><i class="material-icons left mx-1 mt-1">image</i> Upload Photo </span>
+                        <input type="hidden" name="orderitem_id" value="<?= $item->orderitem_id;?>">
+                        <input type="file" name="orderitem_image" onchange="this.form.submit()">
+                    </div>
+                </div>
+                <?php else: ?>
+                    <div class="mb-2 ">
+                        <small class="ks-font">Attachment</small>
+                    </div>
+                    <div class="chip grey lighten-2 mb-0 grey-text text-darken-4">
+                        <img src="<?= base_url('assets/image/attachment/'.$item->upload_image);?>" alt="attachment">
+                            <a class="grey-text" href="<?= base_url('user/item_image_remove/'.$item->orderitem_id);?>">
+                                <i class="close material-icons">close</i>
+                            </a>
+
+                    </div>
+                <?php endif;?>
+            <?= form_close();?>
+            <?php endif;?>
                                     </div>
                                 </div>
                             </div>
 							
                         <?php endif; 
                     endforeach; ?>
-
-                    <?php if($o->order_status == 0): ?>
-						<div class="mt-3 left">
-							<span class=" chip blue white-text">Order Processing</span>
-						</div>
-
-                    <?php elseif($o->order_status == 1): ?>
-                        <div class="mt-3 left">
-                            <span class=" chip green white-text">Order Accepted</span>
+                    </div>
+                    <div class="card-action white">
+                        <div class="row  mb-0">
+                        <div class= "col s6 l3">
+                         <?php if($o->order_status == 0): ?>
+                           <span class=" chip blue white-text">Order Processing</span>
+                         <?php elseif($o->order_status == 1): ?>
+                                <span class=" chip green white-text">Order Accepted</span>
+                        <?php elseif($o->order_status == 2): ?>
+                                <span class=" chip orange darken-3 white-text">Order Dispatched</span>
+                        <?php elseif($o->order_status == 3): ?>
+                                <span class=" chip grey darken-2 white-text">Order Delivered</span>
+                        <?php elseif($o->order_status == 4): ?>
+                                <span class=" chip red white-text">Order Cancelled</span>
+                        <?php endif;?>
                         </div>
-                    <?php elseif($o->order_status == 2): ?>
-                          <div class="mt-3 left">
-                            <span class=" chip orange darken-3 white-text">Order Dispatched</span>
-                        </div>
-                    <?php elseif($o->order_status == 3): ?>
-                          <div class="mt-3 left">
-                            <span class=" chip grey darken-2 white-text">Order Delivered</span>
-                        </div>
-                    <?php elseif($o->order_status == 4): ?>
-                          <div class="mt-3 left">
-                            <span class=" chip red white-text">Order Cancelled</span>
-                        </div>
-                    <?php endif;?>
-						<div class="mt-3 right">
-								<h6 class="grey-text text-darken-2 font-weight-bold left mr-4 h4">Rs. <?= $o->amount; ?>/-</h6>
-
-                             <?php if($o->order_status == 0): ?>
-                                <a href="" class="red-text font-weight-bolder left">Cancel</a>
-							<?php endif;?>	
-							 </div>
-							 <div class="clearfix"></div>
-						</div>
-                       </div>
-                            <?php endforeach;  ?>
+                    <div class="col s6 offset-l7 l2">
+                        <h6 class="ks-font  left mr-4">Rs. <?= $o->amount; ?>/-</h6>
+                         <?php if($o->order_status == 0): ?>
+                            <a href="" class="red-text font-weight-bolder left">Cancel</a>
+                            <?php endif;?>  
+                         </div>
+                    </div>
+                    </div>
+                </div>
+			 <div class="clearfix"></div>
+						
+         <?php endforeach;  ?>
 
 							
             <?php else:?>
@@ -91,6 +113,7 @@
                 </div>
             <?php endif;?>
             </div>
+        </div>
         </div>
         <?php require_once("include/footerlink.php");?>
 </body>

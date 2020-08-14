@@ -13,7 +13,7 @@
     <?php include_once('include/nav.php');
     
     ?>
-        <div class="container px-lg-5 px-0 mt-3">
+        <div class="container-fluid px-lg-5 px-0 mt-3">
             <div class="row">
                 <div class="col s12 ">
                     <h5 class="ks-font">Checkout</h5>
@@ -36,8 +36,11 @@
                                         </div>
                                     </div>
                                     <?php endforeach;?>
-                            </div>
-                            <input type="submit" class="btn right orange darken-3 mt-n3" value="Proceed to pay"> 
+
+                                    <div class="col-lg-11 mr-3">
+                                        <input type="submit" class="btn right red darken-3 " value="Proceed to pay"> 
+                                    </div>
+                            
                      <?= form_close();?>
                         <div class="clearfix"></div>
                         <hr class="mt-2">
@@ -87,7 +90,7 @@
                 </div>
                 <div class="col s12 l4">
                     <div class="card">
-                        <div class="card-content p-0 m-0">
+                        <div class="card-content  p-0 m-0">
                             <h6 class="px-3 py-0">Your Carts</h6>
                             <ul class="collection">
                                 <?php foreach($orderitem as $item): ?>
